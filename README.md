@@ -17,15 +17,11 @@ A simple and secure password manager built with Python and Tkinter. This applica
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/password-manager.git
+   git clone https://github.com/AenuHub/password-manager.git
    ```
 2. Navigate to the project directory:
    ```bash
    cd password-manager
-   ```
-3. Install the required packages (if any):
-   ```bash
-   pip install -r requirements.txt
    ```
 
 ### Usage

@@ -7,6 +7,8 @@ A simple and secure password manager built with Python and Tkinter. This applica
 - Store website, email, and password combinations in a local file.
 - Generate secure random passwords.
 - Validate user input to ensure all fields are filled correctly.
+- Display error messages for invalid input.
+- Search for specific credentials by website.
 - User-friendly GUI built with Tkinter.
 
 ### Preview 📸

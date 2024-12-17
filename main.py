@@ -1,3 +1,4 @@
+from re import search
 from tkinter import *
 import random, string, os
 
@@ -55,6 +56,33 @@ def generate_password():
     password_entry.delete(0, END)
     password_entry.insert(0, password)
 
+def search():
+    website = website_entry.get()
+    found = False
+    with open("data.txt", "r") as data_file:
+        data = data_file.readlines()
+        for line in data:
+            if website in line and website != "":
+                found = True
+                website,email, password = line.strip().split(" | ")
+                popup = Toplevel()
+                popup.title(f"{website}")
+                email_label = Label(popup, text=f"Email: {email}")
+                email_label.grid(column=0, row=0, columnspan=2, padx=10, pady=10)
+                password_label = Label(popup, text=f"Password: {password}")
+                password_label.grid(column=0, row=1, columnspan=2, padx=10, pady=10)
+                ok_button = Button(popup, text="Ok", command=popup.destroy)
+                ok_button.grid(column=1, row=2, padx=10, pady=10)
+                break
+        if not found:
+            popup = Toplevel()
+            popup.title("Error")
+            error_label = Label(popup, text="No password found.")
+            error_label.grid(column=0, row=0, columnspan=2, padx=10, pady=10)
+            ok_button = Button(popup, text="Ok", command=popup.destroy)
+            ok_button.grid(column=1, row=1, padx=10, pady=10)
+
+
 window = Tk()
 window.title("Password Manager")
 window.config(padx=20, pady=20)
@@ -73,8 +101,8 @@ email_label.grid(column=0, row=2, sticky="e")
 password_label = Label(text="Password:")
 password_label.grid(column=0, row=3, sticky="e")
 
-website_entry = Entry(width=35)
-website_entry.grid(column=1, row=1, columnspan=2, sticky="we")
+website_entry = Entry(width=21)
+website_entry.grid(column=1, row=1, sticky="we")
 website_entry.focus()
 
 email_entry = Entry(width=35)
@@ -83,6 +111,9 @@ email_entry.insert(0, "mail@example.com")
 
 password_entry = Entry(width=21)
 password_entry.grid(column=1, row=3, sticky="we")
+
+search_button = Button(text="Search", width=15, command=search)
+search_button.grid(column=2, row=1, sticky="e", padx=(5,0))
 
 generate_password_button = Button(text="Generate Password", command=generate_password)
 generate_password_button.grid(column=2, row=3, sticky="e", padx=(5,0))
